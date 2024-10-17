@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMathContext1.0</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <header></header>
+    <main>
+        <section class="centrado" id="contenedor_main">
+            <span class="" id="titulo_app">MY MATCH CONTEXT</span>
+            <form action="javascript:get_datos();" class="">
+                <div class="componems_2">
+                    <label for="txt_user_name" class="lb_form">usuario</label>
+                    <input type="text" name="txt_user_name" id="txt_user_name" class="inputs" placeholder="USUARIO">
+                </div>
+                <br>
+                <div class="componems_2">
+                    <label for="select_dificultad" class="lb_form">dificultad</label>
+                    <select name="select_dificultad" id="select_dificultad" class="inputs">
+                        <option value="0">facil</option>
+                        <option value="1">medio</option>
+                        <option value="2">dificil</option>
+                        <option value="3">experto</option>
+                    </select>
+                </div>
+                <br><br>
+                <div class="flex_2_rows">
+                    <label for="txt_user_name" class="lb_form">tipo operaciones</label>
+                    <div class="lista_opciones">
+                        <div class="componems_2">
+                        <label for="" class="lb_form">+</label>
+                        <input type="checkbox" name="op_mas" id="op_mas" class="checks">
+                        </div>
+                        
+                        <div class="componems_2">
+                        <label for="" class="lb_form">-</label>
+                        <input type="checkbox" name="op_menos" id="op_menos" class="checks">
+                        </div>
+
+                        <div class="componems_2">
+                        <label for="" class="lb_form">*</label>
+                        <input type="checkbox" name="op_mult" id="op_mult" class="checks">                     
+                        </div>
+
+                        <div class="componems_2">
+                        <label for="" class="lb_form">/</label>
+                        <input type="checkbox" name="op_div" id="op_div" class="checks">   
+                        </div>
+
+                        <div class="componems_2">
+                        <label for="" class="lb_form">todas</label>
+                        <input type="checkbox" name="op_todos" id="op_todos" class="checks">
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <button class="buttons" id="bt_entrar">iniciar</button>
+            </form>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
