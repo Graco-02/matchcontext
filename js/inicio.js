@@ -1,17 +1,25 @@
 var data;
 var respuesta_final = 0;
-
+var puntuacion = 0;
+let timerId = Number(30);
+var max_puntuacion = 0;
+const myInterval =0 ;
 
 
 function set_datos(){
     var usuario = localStorage.getItem('usuario');
     var dificultad = localStorage.getItem('dificultad');
     var lista_operaciones = localStorage["lista_operaciones"];
+    var puntuacion_text = document.getElementById('user_puntuacion'); 
+    puntuacion_text.innerHTML = puntuacion;
     
+    //seteo el nombre del usuario logueado en pantalla
     document.getElementById('user_name').innerHTML = usuario;
+    
     
     lista_operaciones = set_operacion(lista_operaciones);
     get_evaluar_dificultad();
+    myInterval = setInterval(actualizar_contador, 1000);
 }
 
 
@@ -74,14 +82,10 @@ function get_evaluar_dificultad(){
         operaciones_array.push(operacion);
     }
 
-   // console.log(cantidades_array);
-   // console.log(operaciones_array);
+
 
     var index_ant = 0;
     var respuesta = 0;
-
-/*    var cantidades_array = new Array();
-    var operaciones_array = new Array();*/
 
 
     for(k=0;k<cantidades;k++){//armo la operacion a mostrar
@@ -124,41 +128,86 @@ function agregar_posibles_respuestas(respuesta){
     var respuesta_2 = Number(respuesta-1);
     var respuesta_3 = Number(respuesta+2);
 
-    console.log('posibles repuestas = ' + respuesta_1 +' | ' +respuesta_2+' | ' +respuesta_3);
-    const div = document.getElementById('respuesta_div');
-    //div.remove();
-    const element = document.createElement("label");
-    element.innerHTML = respuesta_1;
-    element.onclick = function() {
-        get_validar_respuesta(respuesta_1);
-    }
-    div.appendChild(element);
+    var array_respuestas = new Array();
+    array_respuestas.push(respuesta_1);
+    array_respuestas.push(respuesta_2);
+    array_respuestas.push(respuesta_3);
+    array_respuestas.sort(function() { return Math.random() - 0.5 });
 
+    console.log('posibles repuestas = ' + respuesta_1 +' | ' +respuesta_2+' | ' +respuesta_3);
+    console.log(array_respuestas);
+   
+     const div = document.getElementById('respuesta_div');
+       div.innerHTML = '';
+       const element = document.createElement("label");
+       element.innerHTML = array_respuestas[0];
+       element.onclick = function() {
+        get_validar_respuesta(array_respuestas[0]);
+       }
+       div.appendChild(element);
+   // }
     const element_2 = document.createElement("label");
-    element_2.innerHTML = respuesta_2;
+    element_2.innerHTML = array_respuestas[1];
     element_2.onclick = function() {
-        get_validar_respuesta(respuesta_2);
+        get_validar_respuesta(array_respuestas[1]);
     }
     div.appendChild(element_2);
 
     const element_3 = document.createElement("label");
-    element_3.innerHTML = respuesta_3;
+    element_3.innerHTML = array_respuestas[2];
     element_3.onclick = function() {
-        get_validar_respuesta(respuesta_3);
+        get_validar_respuesta(array_respuestas[2]);
     }
     div.appendChild(element_3);
+
 }
 
 
 function get_validar_respuesta(respuesta_seleccionada){
     var respuesta_a_mostrar = document.getElementById('contenido_operaciones_respuesta');
-    if(respuesta_seleccionada == respuesta_final){
-        respuesta_a_mostrar.classList.toggle('correcto');
-      //  alert('correcto');
+    var puntuacion_text = document.getElementById('user_puntuacion');
+    var lista_operaciones = localStorage["lista_operaciones"];
+    lista_operaciones = set_operacion(lista_operaciones);
+
+    if(respuesta_seleccionada == respuesta_final && timerId > 0){
+        puntuacion += 10;
+        timerId = 30;
     }else{
-        respuesta_a_mostrar.classList.toggle('incorrecto');
-       // alert('incorrecto');
+       puntuacion -= 10;
+    }
+    puntuacion_text.innerHTML = puntuacion;
+    get_evaluar_dificultad();
+    if(max_puntuacion < puntuacion){
+        max_puntuacion = puntuacion;
+    }
+    eveluar_si_sigo();
+}
+
+function actualizar_contador() {
+    var puntuacion_text = document.getElementById('user_puntuacion');
+    var cn_text = document.getElementById('user_contador');
+
+
+    if(timerId <= 0){
+        puntuacion -= 10;
+        var lista_operaciones = localStorage["lista_operaciones"];
+        lista_operaciones = set_operacion(lista_operaciones);
+        get_evaluar_dificultad();
+        timerId = 30;
+    }else{
+        timerId -= 1;
+    }
+    puntuacion_text.innerHTML = puntuacion;
+    cn_text.innerHTML = timerId;
+  //  eveluar_si_sigo();
+}
+
+
+function eveluar_si_sigo(){
+    if(puntuacion <= 0){
+        alert('Has perdido tu maxima puntuacion fue = '+max_puntuacion);
+        location.href = "index.html";
     }
 
-    respuesta_a_mostrar.innerHTML =respuesta_final; 
+    clearInterval(myInterval);
 }

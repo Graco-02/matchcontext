@@ -1,11 +1,18 @@
 .contenido_inicio{
-    position: absolute;
+    /*position: absolute;
     background-color: rgba(240, 248, 255, 0.322);
     padding: 5rem;
     border-radius: 10px;
     width: 35%;
     left: 40%;
+    box-shadow: 0 0 5px black;*/
+
+    background-color: rgba(240, 248, 255, 0.322);
+    padding: 5rem;
+    border-radius: 10px;
     box-shadow: 0 0 5px black;
+    float: right;
+    width: 50%;
 }
 
 .contenido_console{
@@ -69,14 +76,37 @@
     color: aqua;
 }
 
+.seccion_usuario{
+    float:left;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 5rem;
+}
+
 .incorrecto{
     color: red;
 }
 
+#contador{
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.37);
+    padding: 2rem;
+    box-shadow: 0 0 5px black;
+}
+
 @media (max-width:600px) {
     .contenido_inicio{
-        top: 5%;
-        left: 25%;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        float: left;
+        width: 58%;
+    }
+    
+
+    .seccion_usuario{
+        margin-left: 1rem;
     }
 
     #contenido_operaciones_operacion, #contenido_operaciones_respuesta{

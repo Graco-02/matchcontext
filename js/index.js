@@ -14,12 +14,12 @@ function agregar_operaciones(lista_operaciones){
     var op_menos = document.getElementById('op_menos');
     var op_mult =  document.getElementById('op_mult');
     var op_div =   document.getElementById('op_div');
-    var op_todos = document.getElementById('op_todos');
+   // var op_todos = document.getElementById('op_todos');
 
     
-    if(op_todos.checked){
+   /* if(op_todos.checked){
         lista_operaciones.push('.');
-    }else{
+    }else{*/
 
          if(op_mas.checked){
              lista_operaciones.push('+');
@@ -37,7 +37,7 @@ function agregar_operaciones(lista_operaciones){
          if(op_div.checked){
              lista_operaciones.push('/');
          }
-    }
+   // }
 
     //console.log(lista_operaciones);
     
